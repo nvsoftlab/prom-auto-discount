@@ -14,8 +14,11 @@ import {
   faCheck,
   faGear,
   faKey,
+  faLock,
   faMoon,
   faRocket,
+  faShield,
+  faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -255,7 +258,7 @@ export default function LandingPage() {
       </section>
 
       {/* How it works */}
-      <section id="how" className="py-16 md:py-24 px-4 md:px-6 bg-white">
+      <section id="how" className="py-8 px-4 md:px-6 bg-white">
         <div className="max-w-5xl mx-auto">
           <FadeUp>
             <div className="text-center mb-10 md:mb-14">
@@ -287,6 +290,58 @@ export default function LandingPage() {
                   </h3>
                   <p className="text-[#5c5c7a] text-sm leading-relaxed">
                     {step.desc}
+                  </p>
+                </div>
+              </FadeUp>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Security */}
+      <section id="security" className="py-8 pt-0 md:py-24 px-4 md:px-6 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <FadeUp>
+            <div className="text-center mb-10 md:mb-14">
+              <div className="text-[#7b04df] text-xs font-semibold uppercase tracking-widest mb-3">
+                Безпека
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#01011b]">
+                ВАШІ ДАНІ В БЕЗПЕЦІ НА 100%
+              </h2>
+            </div>
+          </FadeUp>
+          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+            {[
+              {
+                icon: faShield,
+                title: 'Шифрування AES-256',
+                desc: 'Ми не зберігаємо ваш API-ключ у відкритому вигляді. Він шифрується банківським стандартом захисту. Навіть ми не бачимо ваш ключ.',
+              },
+              {
+                icon: faLock,
+                title: 'Обмежений доступ',
+                desc: 'Наш сервіс використовує API виключно для оновлення дат знижок. Ми не читаємо ваші замовлення та не чіпаємо базу клієнтів.',
+              },
+              {
+                icon: faTrash,
+                title: 'Ви господар ключа',
+                desc: 'Ви можете видалити магазин або відкликати API-ключ у кабінеті Пром в будь-яку секунду — доступ скрипта миттєво припиниться.',
+              },
+            ].map((item, i) => (
+              <FadeUp key={item.title} delay={i * 0.12}>
+                <div className="bg-[#f5f5f7] border border-[#dadae8] rounded-xl p-5 md:p-6 h-full">
+                  <div className="w-10 h-10 rounded-lg bg-[#7b04df]/8 border border-[#7b04df]/15 flex items-center justify-center mb-4">
+                    <FontAwesomeIcon
+                      icon={item.icon}
+                      className="w-4 h-4 text-[#7b04df]"
+                    />
+                  </div>
+                  <h3 className="text-base font-bold mb-2 text-[#01011b]">
+                    {item.title}
+                  </h3>
+                  <p className="text-[#5c5c7a] text-sm leading-relaxed">
+                    {item.desc}
                   </p>
                 </div>
               </FadeUp>
@@ -373,8 +428,8 @@ export default function LandingPage() {
                       </span>
                     </div>
                     <div className="inline-flex items-center gap-1.5 bg-green-50 border border-green-200 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">
-                      <FontAwesomeIcon icon={faCheck} className="w-3 h-3" />
-                      3 дні безкоштовно
+                      <FontAwesomeIcon icon={faCheck} className="w-3 h-3" />3
+                      дні безкоштовно
                     </div>
                   </div>
                   <ul className="flex flex-col gap-2.5 mb-5 flex-1">

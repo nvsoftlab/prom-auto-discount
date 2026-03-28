@@ -17,6 +17,9 @@ export function NavLinks() {
       <button onClick={() => smoothScrollTo('how')} className="hover:text-[#01011b] transition-colors cursor-pointer">
         Як це працює
       </button>
+      <button onClick={() => smoothScrollTo('security')} className="hover:text-[#01011b] transition-colors cursor-pointer">
+        Безпека
+      </button>
       <button onClick={() => smoothScrollTo('pricing')} className="hover:text-[#01011b] transition-colors cursor-pointer">
         Ціни
       </button>
@@ -48,6 +51,9 @@ export function MobileNav() {
         <div className="absolute top-full right-0 mt-1 w-64 bg-white border border-[#dadae8] rounded-xl shadow-lg px-4 py-3 flex flex-col gap-2 z-50">
           <button onClick={() => handleScroll('how')} className="text-left text-[#5c5c7a] hover:text-[#01011b] py-2 text-sm transition-colors">
             Як це працює
+          </button>
+          <button onClick={() => handleScroll('security')} className="text-left text-[#5c5c7a] hover:text-[#01011b] py-2 text-sm transition-colors">
+            Безпека
           </button>
           <button onClick={() => handleScroll('pricing')} className="text-left text-[#5c5c7a] hover:text-[#01011b] py-2 text-sm transition-colors">
             Ціни
