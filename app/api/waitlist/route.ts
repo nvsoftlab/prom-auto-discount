@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
   const { name, email, phone, telegram, note } = await req.json()
 
   if (!email && !phone && !telegram) {
-    return NextResponse.json({ error: 'Вкажіть хоча б один спосіб зв'язку' }, { status: 400 })
+    return NextResponse.json({ error: `Вкажіть хоча б один спосіб зв'язку` }, { status: 400 })
   }
 
   await prisma.waitlist.create({
