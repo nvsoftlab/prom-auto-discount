@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { FadeUp, FadeIn, ScaleIn, FloatingBadge } from '@/components/landing/animated-section'
-import { NavLinks, ScrollButton } from '@/components/landing/nav-links'
+import { NavLinks, MobileNav, ScrollButton } from '@/components/landing/nav-links'
 
 const steps = [
   {
@@ -19,7 +19,7 @@ const steps = [
     num: '03',
     icon: '🌙',
     title: 'Спіть спокійно',
-    desc: 'Щоночі о 23:50 PromAuto оновлює дати знижок — значки "Знижка" не гаснуть ніколи.',
+    desc: 'Щоночі о 23:50 PromAutoDiscount оновлює дати знижок — значки "Знижка" не гаснуть ніколи.',
   },
 ]
 
@@ -59,14 +59,18 @@ export default function LandingPage() {
       </div>
 
       {/* Nav */}
-      <header className="relative z-10 border-b border-white/5 backdrop-blur-sm bg-black/20 px-6 py-4 sticky top-0">
+      <header className="relative z-20 border-b border-white/5 backdrop-blur-sm bg-black/20 px-4 md:px-6 py-3 md:py-4 sticky top-0">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-xs font-black">P</div>
-            <span className="text-lg font-bold tracking-tight">PromAuto</span>
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-xs font-black shrink-0">P</div>
+            <span className="text-base font-bold tracking-tight">PromAutoDiscount</span>
           </div>
+
+          {/* Desktop nav */}
           <NavLinks />
-          <div className="flex gap-3 items-center">
+
+          {/* Desktop auth buttons */}
+          <div className="hidden md:flex gap-3 items-center">
             <Link href="/login" className="text-sm text-zinc-400 hover:text-white transition-colors px-3 py-1.5">
               Увійти
             </Link>
@@ -74,25 +78,26 @@ export default function LandingPage() {
               Спробувати безкоштовно
             </Link>
           </div>
+
+          {/* Mobile hamburger */}
+          <MobileNav />
         </div>
       </header>
 
       {/* Hero */}
-      <section className="relative z-10 flex flex-col items-center text-center px-6 pt-28 pb-24 max-w-5xl mx-auto w-full">
+      <section className="relative z-10 flex flex-col items-center text-center px-4 md:px-6 pt-14 md:pt-28 pb-12 md:pb-24 max-w-5xl mx-auto w-full">
         <FloatingBadge>
-          <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-1.5 text-sm text-indigo-300 mb-8">
+          <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-1.5 text-sm text-indigo-300 mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
             7 днів безкоштовно — без карти
           </div>
         </FloatingBadge>
 
         <FadeUp delay={0.1}>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6">
+          <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-5">
             Ваші знижки на{' '}
-            <span className="relative">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400">
-                Prom.ua
-              </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400">
+              Prom.ua
             </span>
             <br />
             ніколи не сплять
@@ -100,16 +105,16 @@ export default function LandingPage() {
         </FadeUp>
 
         <FadeUp delay={0.2}>
-          <p className="text-xl text-zinc-400 max-w-2xl mb-10 leading-relaxed">
+          <p className="text-base md:text-xl text-zinc-400 max-w-2xl mb-8 leading-relaxed">
             Автоматичне оновлення знижок щоночі о <strong className="text-white">23:50</strong>.
             Значки «Знижка» залишаються активними — покупці бачать терміновість, ви отримуєте продажі.
           </p>
         </FadeUp>
 
-        <FadeUp delay={0.3} className="flex flex-col sm:flex-row gap-4 items-center">
+        <FadeUp delay={0.3} className="flex flex-col sm:flex-row gap-3 items-center">
           <Link
             href="/register"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold px-8 py-4 rounded-xl text-base transition-all shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold px-6 md:px-8 py-3.5 md:py-4 rounded-xl text-sm md:text-base transition-all shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 w-full sm:w-auto justify-center"
           >
             Розпочати безкоштовно
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -120,9 +125,8 @@ export default function LandingPage() {
         </FadeUp>
 
         {/* Mock dashboard preview */}
-        <FadeIn delay={0.5} className="mt-20 w-full max-w-4xl">
+        <FadeIn delay={0.5} className="mt-12 md:mt-20 w-full max-w-4xl">
           <div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden shadow-2xl shadow-black/60">
-            {/* Window chrome */}
             <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10 bg-black/20">
               <div className="w-3 h-3 rounded-full bg-red-500/70" />
               <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
@@ -133,76 +137,72 @@ export default function LandingPage() {
                 </div>
               </div>
             </div>
-            {/* Mock UI content */}
-            <div className="p-6 bg-gradient-to-b from-zinc-900/80 to-zinc-950/80">
-              <div className="flex items-center justify-between mb-5">
+            <div className="p-4 md:p-6 bg-gradient-to-b from-zinc-900/80 to-zinc-950/80">
+              <div className="flex items-center justify-between mb-4">
                 <div>
-                  <div className="h-5 w-32 bg-white/10 rounded mb-2" />
-                  <div className="h-3 w-48 bg-white/5 rounded" />
+                  <div className="h-4 w-28 bg-white/10 rounded mb-1.5" />
+                  <div className="h-3 w-40 bg-white/5 rounded" />
                 </div>
-                <div className="h-8 w-36 bg-indigo-600/60 rounded-lg" />
+                <div className="h-8 w-28 md:w-36 bg-indigo-600/60 rounded-lg" />
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {[
                   { name: 'Магазин Одяг', status: 'Активний', updated: '147 товарів', color: 'emerald' },
                   { name: 'Електроніка UA', status: 'Активний', updated: '89 товарів', color: 'emerald' },
                   { name: 'Дім та Сад', status: 'Призупинено', updated: '—', color: 'zinc' },
                 ].map((shop, i) => (
-                  <div key={i} className={`bg-white/5 border border-white/8 rounded-xl p-4 ${i === 2 ? 'md:col-span-1' : ''}`}>
-                    <div className="flex items-center justify-between mb-3">
+                  <div key={i} className="bg-white/5 border border-white/8 rounded-xl p-3 md:p-4">
+                    <div className="flex items-center justify-between mb-2">
                       <div className="font-medium text-sm text-white">{shop.name}</div>
                       <div className={`text-xs px-2 py-0.5 rounded-full ${shop.color === 'emerald' ? 'bg-emerald-500/15 text-emerald-400' : 'bg-zinc-700/50 text-zinc-400'}`}>
                         {shop.status}
                       </div>
                     </div>
                     <div className="text-xs text-zinc-500">Оновлено сьогодні · {shop.updated}</div>
-                    <div className="flex gap-2 mt-3">
-                      <div className="h-6 flex-1 bg-white/5 rounded" />
-                      <div className="h-6 w-24 bg-indigo-600/40 rounded" />
+                    <div className="flex gap-2 mt-2.5">
+                      <div className="h-5 flex-1 bg-white/5 rounded" />
+                      <div className="h-5 w-20 bg-indigo-600/40 rounded" />
                     </div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-          <p className="text-xs text-zinc-600 mt-3">Інтерфейс дашборду PromAuto</p>
+          <p className="text-xs text-zinc-600 mt-2">Інтерфейс дашборду PromAutoDiscount</p>
         </FadeIn>
       </section>
 
-      {/* Logos / Social proof */}
-      <section className="relative z-10 border-y border-white/5 py-10 px-6">
+      {/* Social proof bar */}
+      <section className="relative z-10 border-y border-white/5 py-6 md:py-10 px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
-          <p className="text-center text-xs text-zinc-600 uppercase tracking-widest mb-6">Працює з маркетплейсом</p>
-          <div className="flex items-center justify-center gap-12 flex-wrap">
-            {/* Prom.ua stylized logo */}
-            <div className="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center font-black text-white text-sm">P</div>
-              <span className="font-bold text-zinc-300 text-xl tracking-tight">Prom.ua</span>
+          <p className="text-center text-xs text-zinc-600 uppercase tracking-widest mb-4 md:mb-6">Працює з маркетплейсом</p>
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12">
+            <div className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center font-black text-white text-sm shrink-0">P</div>
+              <span className="font-bold text-zinc-300 text-lg tracking-tight">Prom.ua</span>
             </div>
-            <div className="text-zinc-700 text-sm">Офіційне API v1</div>
-            <div className="text-zinc-700 text-sm">AES-256 шифрування</div>
-            <div className="text-zinc-700 text-sm">Kyiv TZ підтримка</div>
+            <span className="text-zinc-600 text-sm">Офіційне API v1</span>
+            <span className="text-zinc-600 text-sm">AES-256 шифрування</span>
+            <span className="text-zinc-600 text-sm">Kyiv TZ підтримка</span>
           </div>
         </div>
       </section>
 
       {/* How it works */}
-      <section id="how" className="relative z-10 py-28 px-6">
+      <section id="how" className="relative z-10 py-16 md:py-28 px-4 md:px-6">
         <div className="max-w-5xl mx-auto">
           <FadeUp>
-            <div className="text-center mb-16">
-              <div className="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-3">Як це працює</div>
-              <h2 className="text-4xl font-bold">Три кроки до автоматизації</h2>
+            <div className="text-center mb-10 md:mb-16">
+              <div className="text-indigo-400 text-xs font-semibold uppercase tracking-widest mb-3">Як це працює</div>
+              <h2 className="text-3xl md:text-4xl font-bold">Три кроки до автоматизації</h2>
             </div>
           </FadeUp>
-          <div className="grid md:grid-cols-3 gap-8 relative">
-            {/* connector line */}
-            <div className="hidden md:block absolute top-8 left-1/6 right-1/6 h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent" />
+          <div className="grid md:grid-cols-3 gap-4 md:gap-8">
             {steps.map((step, i) => (
               <FadeUp key={step.num} delay={i * 0.15}>
-                <div className="relative bg-white/3 border border-white/8 rounded-2xl p-6 hover:border-indigo-500/30 hover:bg-indigo-500/5 transition-all group">
+                <div className="bg-white/3 border border-white/8 rounded-2xl p-5 md:p-6 hover:border-indigo-500/30 hover:bg-indigo-500/5 transition-all">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-indigo-500/15 border border-indigo-500/20 flex items-center justify-center text-xl">
+                    <div className="w-10 h-10 rounded-xl bg-indigo-500/15 border border-indigo-500/20 flex items-center justify-center text-xl shrink-0">
                       {step.icon}
                     </div>
                     <span className="text-xs font-mono text-indigo-400/60">{step.num}</span>
@@ -217,20 +217,20 @@ export default function LandingPage() {
       </section>
 
       {/* Stats */}
-      <section className="relative z-10 py-16 px-6">
+      <section className="relative z-10 py-6 md:py-16 px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
           <ScaleIn>
-            <div className="grid grid-cols-3 gap-6 bg-gradient-to-br from-indigo-900/20 to-violet-900/20 border border-indigo-500/20 rounded-2xl p-8">
+            <div className="grid grid-cols-3 gap-3 md:gap-6 bg-gradient-to-br from-indigo-900/20 to-violet-900/20 border border-indigo-500/20 rounded-2xl p-5 md:p-8">
               {[
                 { value: '23:50', label: 'Час запуску щодня' },
-                { value: '100%', label: 'Uptime автоматики' },
-                { value: 'AES-256', label: 'Шифрування токенів' },
+                { value: '100%', label: 'Uptime' },
+                { value: 'AES-256', label: 'Шифрування' },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <div className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400 mb-1">
+                  <div className="text-xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400 mb-1">
                     {stat.value}
                   </div>
-                  <div className="text-xs text-zinc-500">{stat.label}</div>
+                  <div className="text-xs text-zinc-500 leading-tight">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -239,39 +239,39 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="relative z-10 py-28 px-6">
+      <section id="pricing" className="relative z-10 py-16 md:py-28 px-4 md:px-6">
         <div className="max-w-5xl mx-auto">
           <FadeUp>
-            <div className="text-center mb-16">
-              <div className="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-3">Тарифи</div>
-              <h2 className="text-4xl font-bold mb-3">Прозорі ціни</h2>
+            <div className="text-center mb-10 md:mb-16">
+              <div className="text-indigo-400 text-xs font-semibold uppercase tracking-widest mb-3">Тарифи</div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">Прозорі ціни</h2>
               <p className="text-zinc-400">Без прихованих платежів. Скасуйте будь-коли.</p>
             </div>
           </FadeUp>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
             {plans.map((plan, i) => (
               <FadeUp key={plan.name} delay={i * 0.1}>
-                <div className={`relative flex flex-col rounded-2xl border p-6 h-full transition-all hover:-translate-y-1 ${
+                <div className={`relative flex flex-col rounded-2xl border p-5 md:p-6 h-full transition-all hover:-translate-y-1 ${
                   plan.accent
                     ? 'bg-gradient-to-b from-indigo-600/20 to-violet-600/10 border-indigo-500/50 shadow-lg shadow-indigo-500/10'
                     : 'bg-white/3 border-white/8 hover:border-white/15'
                 }`}>
                   {plan.accent && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <div className="bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                      <div className="bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">
                         Найпопулярніший
                       </div>
                     </div>
                   )}
-                  <div className="mb-6">
+                  <div className="mb-5">
                     <div className="text-lg font-bold mb-0.5">{plan.name}</div>
-                    <div className="text-zinc-400 text-sm mb-4">{plan.sub}</div>
+                    <div className="text-zinc-400 text-sm mb-3">{plan.sub}</div>
                     <div className="flex items-end gap-1">
                       <span className="text-4xl font-extrabold">{plan.price}</span>
                       <span className="text-zinc-400 text-sm mb-1.5">грн / міс</span>
                     </div>
                   </div>
-                  <ul className="flex flex-col gap-2.5 mb-6 flex-1">
+                  <ul className="flex flex-col gap-2 mb-5 flex-1">
                     {plan.features.map((f) => (
                       <li key={f} className="flex items-start gap-2 text-sm text-zinc-300">
                         <svg className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -299,16 +299,16 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Banner */}
-      <section className="relative z-10 py-20 px-6">
+      <section className="relative z-10 py-10 md:py-20 px-4 md:px-6">
         <div className="max-w-3xl mx-auto">
           <FadeUp>
-            <div className="text-center bg-gradient-to-br from-indigo-600/20 via-violet-600/15 to-purple-600/10 border border-indigo-500/25 rounded-3xl p-12">
+            <div className="text-center bg-gradient-to-br from-indigo-600/20 via-violet-600/15 to-purple-600/10 border border-indigo-500/25 rounded-3xl p-8 md:p-12">
               <div className="text-4xl mb-4">🚀</div>
-              <h2 className="text-3xl font-bold mb-3">Готові автоматизувати знижки?</h2>
-              <p className="text-zinc-400 mb-8">Підключіть перший магазин за 2 хвилини. Перші 7 днів — безкоштовно.</p>
+              <h2 className="text-2xl md:text-3xl font-bold mb-3">Готові автоматизувати знижки?</h2>
+              <p className="text-zinc-400 mb-7 text-sm md:text-base">Підключіть перший магазин за 2 хвилини. Перші 7 днів — безкоштовно.</p>
               <Link
                 href="/register"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold px-8 py-4 rounded-xl transition-all shadow-lg shadow-indigo-500/25 hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold px-6 md:px-8 py-3.5 md:py-4 rounded-xl transition-all shadow-lg shadow-indigo-500/25 hover:-translate-y-0.5 text-sm md:text-base"
               >
                 Розпочати безкоштовно
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -321,13 +321,13 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-white/5 py-8 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-600">
+      <footer className="relative z-10 border-t border-white/5 py-6 px-4 md:px-6 mt-auto">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-zinc-600">
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-[10px] font-black text-white">P</div>
-            <span className="font-semibold text-zinc-400">PromAuto</span>
+            <div className="w-5 h-5 rounded bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-[10px] font-black text-white shrink-0">P</div>
+            <span className="font-semibold text-zinc-400">PromAutoDiscount</span>
           </div>
-          <span>© {new Date().getFullYear()} PromAuto. Всі права захищені.</span>
+          <span className="text-xs text-center">© {new Date().getFullYear()} PromAutoDiscount. Всі права захищені.</span>
           <div className="flex gap-6">
             <Link href="/login" className="hover:text-zinc-400 transition-colors">Увійти</Link>
             <Link href="/register" className="hover:text-zinc-400 transition-colors">Реєстрація</Link>

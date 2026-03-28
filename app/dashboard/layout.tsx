@@ -12,7 +12,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
     <div className="min-h-screen bg-zinc-950 flex flex-col">
       <header className="border-b border-zinc-800 px-6 py-4 flex items-center justify-between">
         <Link href="/dashboard" className="text-xl font-bold text-indigo-400">
-          PromAuto
+          PromAutoDiscount
         </Link>
         <div className="flex items-center gap-4">
           <span className="text-sm text-zinc-400">{session.user.email}</span>

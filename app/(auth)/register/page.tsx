@@ -39,11 +39,11 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-zinc-950 px-4">
+    <>
       <Card className="w-full max-w-md bg-zinc-900 border-zinc-800">
         <CardHeader className="text-center">
-          <Link href="/" className="text-2xl font-bold text-indigo-400 mb-2 block">
-            PromAuto
+          <Link href="/" className="text-xl font-bold text-indigo-400 mb-2 block">
+            PromAutoDiscount
           </Link>
           <CardTitle className="text-xl">Створити акаунт</CardTitle>
           <CardDescription className="text-zinc-400">
@@ -110,6 +110,6 @@ export default function RegisterPage() {
           </form>
         </CardContent>
       </Card>
-    </div>
+    </>
   )
 }
