@@ -17,12 +17,12 @@ export default async function ShopSettingsPage({ params }: { params: Promise<{ s
   return (
     <div className="max-w-xl">
       <div className="mb-6">
-        <Link href="/dashboard" className="text-sm text-zinc-400 hover:text-zinc-200">
+        <Link href="/dashboard" className="text-sm text-[#7b04df] hover:text-[#6200d1] transition-colors">
           ← Назад до дашборду
         </Link>
-        <h1 className="text-2xl font-bold mt-3">{shop.name}</h1>
+        <h1 className="text-2xl font-bold mt-3 text-[#01011b]">{shop.name}</h1>
         <div className="flex gap-3 mt-2">
-          <Link href={`/dashboard/shops/${shopId}/logs`} className="text-sm text-indigo-400 hover:underline">
+          <Link href={`/dashboard/shops/${shopId}/logs`} className="text-sm text-[#7b04df] hover:text-[#6200d1] transition-colors">
             Журнал синхронізацій →
           </Link>
         </div>

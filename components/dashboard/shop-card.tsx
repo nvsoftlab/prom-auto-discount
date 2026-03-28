@@ -3,13 +3,9 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button, buttonVariants } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
 import { toast } from 'sonner'
-import { cn } from '@/lib/utils'
 
 interface Shop {
   id: string
@@ -66,80 +62,79 @@ export function ShopCard({ shop }: { shop: Shop }) {
 
   return (
     <>
-      <Card className="bg-zinc-900 border-zinc-800">
-        <CardHeader className="pb-3">
-          <div className="flex items-start justify-between">
-            <CardTitle className="text-base">{shop.name}</CardTitle>
-            <Badge
-              className={
-                active
-                  ? 'bg-emerald-900 text-emerald-300 border-emerald-700'
-                  : 'bg-zinc-800 text-zinc-400 border-zinc-700'
-              }
+      <div className="bg-white border border-[#dadae8] rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+        {/* Header */}
+        <div className="flex items-start justify-between mb-1">
+          <h3 className="font-semibold text-[#01011b]">{shop.name}</h3>
+          <span className={`text-xs px-2 py-0.5 rounded-full font-medium border ${
+            active
+              ? 'bg-green-50 text-green-700 border-green-200'
+              : 'bg-gray-50 text-gray-500 border-gray-200'
+          }`}>
+            {active ? 'Активний' : 'Призупинено'}
+          </span>
+        </div>
+
+        <p className="text-xs text-[#5c5c7a] mb-3">Остання синхронізація: {lastSync}</p>
+
+        {/* Stats */}
+        <div className="flex gap-4 text-sm text-[#5c5c7a] mb-4">
+          <span>Знижка: <strong className="text-[#01011b]">{shop.discountPercent}%</strong></span>
+          <span>Тривалість: <strong className="text-[#01011b]">{shop.durationDays} дн.</strong></span>
+        </div>
+
+        {/* Controls */}
+        <div className="flex items-center justify-between gap-2 flex-wrap">
+          <div className="flex items-center gap-2 text-sm text-[#5c5c7a]">
+            <Switch checked={active} onCheckedChange={toggleStatus} />
+            <span>{active ? 'Автосинк увімкнено' : 'Автосинк вимкнено'}</span>
+          </div>
+          <div className="flex gap-2 flex-wrap">
+            <Link
+              href={`/dashboard/shops/${shop.id}`}
+              className="text-xs font-medium px-3 py-1.5 border border-[#dadae8] rounded-lg text-[#01011b] hover:bg-[#f5f5f7] transition-colors"
             >
-              {active ? 'Активний' : 'Призупинено'}
-            </Badge>
+              Налаштування
+            </Link>
+            <button
+              className="text-xs font-semibold px-3 py-1.5 bg-[#7b04df] hover:bg-[#6200d1] text-white rounded-lg transition-colors disabled:opacity-50"
+              onClick={syncNow}
+              disabled={syncing}
+            >
+              {syncing ? 'Синхронізація...' : 'Синхронізувати'}
+            </button>
+            <button
+              className="text-xs font-medium px-3 py-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+              onClick={() => setShowDelete(true)}
+            >
+              Видалити
+            </button>
           </div>
-          <p className="text-xs text-zinc-500">Остання синхронізація: {lastSync}</p>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-4">
-          <div className="flex gap-4 text-sm text-zinc-400">
-            <span>Знижка: <strong className="text-zinc-200">{shop.discountPercent}%</strong></span>
-            <span>Тривалість: <strong className="text-zinc-200">{shop.durationDays} дн.</strong></span>
-          </div>
-          <div className="flex items-center justify-between gap-2 flex-wrap">
-            <div className="flex items-center gap-2 text-sm text-zinc-400">
-              <Switch checked={active} onCheckedChange={toggleStatus} />
-              <span>{active ? 'Автосинк увімкнено' : 'Автосинк вимкнено'}</span>
-            </div>
-            <div className="flex gap-2 flex-wrap">
-              <Link
-                href={`/dashboard/shops/${shop.id}`}
-                className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'border-zinc-700')}
-              >
-                Налаштування
-              </Link>
-              <Button
-                size="sm"
-                className="bg-indigo-600 hover:bg-indigo-500 text-white"
-                onClick={syncNow}
-                disabled={syncing}
-              >
-                {syncing ? 'Синхронізація...' : 'Синхронізувати'}
-              </Button>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="text-red-400 hover:text-red-300 hover:bg-red-950"
-                onClick={() => setShowDelete(true)}
-              >
-                Видалити
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       <Dialog open={showDelete} onOpenChange={setShowDelete}>
-        <DialogContent className="bg-zinc-900 border-zinc-800">
+        <DialogContent className="bg-white border border-[#dadae8] shadow-xl">
           <DialogHeader>
-            <DialogTitle>Видалити магазин?</DialogTitle>
+            <DialogTitle className="text-[#01011b]">Видалити магазин?</DialogTitle>
           </DialogHeader>
-          <p className="text-zinc-400 text-sm">
-            Магазин <strong className="text-zinc-200">{shop.name}</strong> та всі журнали синхронізації будуть
-            видалені безповоротно.
+          <p className="text-[#5c5c7a] text-sm">
+            Магазин <strong className="text-[#01011b]">{shop.name}</strong> та всі журнали синхронізації будуть видалені безповоротно.
           </p>
           <DialogFooter>
-            <Button variant="ghost" onClick={() => setShowDelete(false)}>
+            <button
+              className="px-4 py-2 text-sm font-medium border border-[#dadae8] rounded-lg text-[#01011b] hover:bg-[#f5f5f7] transition-colors"
+              onClick={() => setShowDelete(false)}
+            >
               Скасувати
-            </Button>
-            <Button
-              className="bg-red-600 hover:bg-red-500 text-white"
+            </button>
+            <button
+              className="px-4 py-2 text-sm font-semibold bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors disabled:opacity-50"
               onClick={handleDelete}
               disabled={deleting}
             >
               {deleting ? 'Видалення...' : 'Так, видалити'}
-            </Button>
+            </button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
