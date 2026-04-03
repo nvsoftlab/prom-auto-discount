@@ -3,6 +3,7 @@ import './globals.css';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/next';
 import { Toaster } from '@/components/ui/sonner';
 
 const inter = Inter({
@@ -41,6 +42,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         {children}
+        <Analytics />
         <Toaster />
       </body>
     </html>
